@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Somnus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<div id="hud">
+  <div id="crosshair"></div>
+  <div id="prompt"></div>
+  <div id="thought"></div>
+  <div id="keyicon" title="You have a key">
+    <svg viewBox="0 0 64 24" width="64" height="24"><circle cx="10" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="3"/><path d="M17 12 H58 M48 12 V20 M55 12 V18" stroke="currentColor" stroke-width="3" fill="none"/></svg>
+  </div>
+</div>
+
+<div id="titlecard"><div class="num"></div><div class="name"></div></div>
+<div id="fade"></div>
+<div id="flash"></div>
+
+<div id="menu" class="screen">
+  <h1>Somnus</h1>
+  <p class="sub">You fell asleep a long time ago.<br>Five doors stand between you and waking.</p>
+  <button id="startBtn">Fall asleep</button>
+  <div class="controls">
+    <span>WASD</span> move &nbsp; <span>Shift</span> run &nbsp; <span>Space</span> jump &nbsp; <span>E</span> interact &nbsp; <span>Esc</span> pause
+  </div>
+  <p class="hint">Headphones recommended. Listen for the keys.</p>
+  <p id="loadErr" class="err"></p>
+</div>
+
+<div id="pause" class="screen hidden">
+  <p class="sub">The dream waits.</p>
+  <button id="resumeBtn">Keep dreaming</button>
+  <label class="sens">Look sensitivity <input id="sens" type="range" min="0.3" max="2.5" step="0.05" value="1"></label>
+</div>
+
+<div id="end" class="screen hidden">
+  <p class="sub" id="endText">you never woke up.</p>
+  <button id="againBtn">Dream again</button>
+</div>
+
+<script type="module" src="src/main.js"></script>
+<script>
+  setTimeout(function () {
+    if (!window.__booted) {
+      document.getElementById('loadErr').textContent =
+        location.protocol === 'file:'
+          ? 'Open this through a local server (run ./serve.sh, then visit http://localhost:8000).'
+          : 'Could not load three.js from the CDN. Check your internet connection and reload.';
+    }
+  }, 8000);
+</script>
+</body>
+</html>
